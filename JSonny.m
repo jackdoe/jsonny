@@ -118,11 +118,11 @@ color-dictionary example:
 		minRowHeight = (minRowHeightString ? [minRowHeightString floatValue] : minRowHeight);
 		_sections = [self sections];
 		[self.tableView	reloadData];
-		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;	
 	} else {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"failed to load table's data" message:@"please try again later {or keep spamming the reload button :)}" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];	
 	}
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;	
 }
 
 - (void) async_reload {
