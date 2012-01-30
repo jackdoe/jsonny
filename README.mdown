@@ -1,4 +1,4 @@
-JSonny - simple UITableViewController subclass, that lets you control the table from remote JSON objects
+JSonny - json controlled uitableviewcontroller
 ---
 
 [![](http://farm8.staticflickr.com/7159/6788565653_6163433af6.jpg)](http://www.flickr.com/photos/71088131@N07/6788565653/)
@@ -23,6 +23,58 @@ JSonny - simple UITableViewController subclass, that lets you control the table 
 		this will start a web server on port 4567 (check out http://127.0.0.1:4567)
 	and then compile and run the example jsonny-example/xcode project
 
+### simple 1 section 1 row table ###
+
+	{
+		"title":"simple table",
+		"sections":
+			[
+				[
+					{
+						"didSelectRow":
+							{
+								"name":"JSonny",
+								"init":
+									{
+										"method":"initWithString:",
+										"argument":"http://localhost:4567/?UITableViewStyleGrouped"
+									}
+							},
+						"heightForRow":"29",
+						"editingStyleDelete":"http://127.0.0.1:9393/delete/5",						
+						"detailTextLabel":"very simple text inside",
+						"textLabel":
+							{
+								"textColor":
+									{
+										"blue":"117",
+										"alpha":"1",
+										"red":"154",
+										"green":"166"
+									},
+								"text":"more detailed object UITableViewCellStyleValue1",	
+								"font":	
+									{
+										"name":"AmericanTypewriter-Light",
+										"size":"39"	
+									}
+							},
+						"image":
+							{
+								"url":"https://www.google.com/intl/en_com/images/srpr/logo3w.png",
+								"layer":
+									{
+										"borderColor":{"blue":"151","alpha":"1","red":"50","green":"150"},
+										"borderWidth":"0","cornerRadius":"64","maskToBounds":"YES"
+									}
+							},
+						"initWithStyle":"UITableViewCellStyleValue1",
+						"backgroundColor":{"blue":"133","alpha":"1","red":"164","green":"85"}
+					}
+				]
+			]
+	}
+									,
 ### root object: ###
 	title => 'table's title'
 	minRowHeight => 'minimal row height'
