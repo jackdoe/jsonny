@@ -23,8 +23,10 @@ JSonny - json controlled uitableviewcontroller
 		this will start a web server on port 4567 (check out http://127.0.0.1:4567)
 	and then compile and run the example jsonny-example/xcode project
 
-### simple 1 section 1 row table ###
+### simple: 1 section 2 rows table ###
+	{ "sections": [[{"textLabel":"simplest row"},{"textLabel":"almost as simple, row 2"}]] }
 
+### more detailed: 1 section 1 row table ###
 	{
 		"title":"simple table",
 		"sections":
