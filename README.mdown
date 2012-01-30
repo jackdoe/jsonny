@@ -4,14 +4,25 @@ JSonny - simple UITableViewController subclass, that lets you control the table 
 [![](http://farm8.staticflickr.com/7159/6788565653_6163433af6.jpg)](http://www.flickr.com/photos/71088131@N07/6788565653/)
 [![](http://farm8.staticflickr.com/7146/6788559637_02187c8dc1.jpg)](http://www.flickr.com/photos/71088131@N07/6788559637/)
 
+## Installation ##
+
+* JSonny uses SBJson(https://github.com/stig/json-framework/) to parse json strings into objects, so download it from https://github.com/stig/json-framework/ and put it in your xcode project
+* copy JSonny.h and JSonny.m into your xcode project
+* thats it :)
+
 ## NOTICE: ##
-	
-	1. there is no support for pure int values, all of them must be converted to string
-		example: borderWidth => 7 must be borderWidth => '7', 
-	2. if the initString contains UITableViewStyleGrouped, then the table style is grouped, otherwise its plain
-	3. if no color is given, when color is expected -  [UIColor clearColor] is used
+
+* there is no support for pure int values, all of them must be converted to string, example: borderWidth => 7 must be borderWidth => '7', 
+* if the initString contains UITableViewStyleGrouped, then the table style is grouped, otherwise its plain
+* if no color is given, when color is expected -  [UIColor clearColor] is used
+
 ## examples: ##
-	
+	the example/ folder contains sinatra(www.sinatrarb.com) script to generate random rows
+		(if you dont have sinatra get it and use it, its AWESOME: gem install sinatra)
+		ruby sinatra-backend.rb -p 4567
+		this will start a web server on port 4567 (check out http://127.0.0.1:4567)
+	and then compile and run the example jsonny-example/xcode project
+
 ### root object: ###
 	title => 'table's title'
 	minRowHeight => 'minimal row height'
