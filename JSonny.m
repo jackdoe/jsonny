@@ -4,7 +4,7 @@ static NSString *editingStyleDelete = @"editingStyleDelete";
 static NSString *didSelectRow = @"didSelectRow";
 static NSString *defaultInitString = @"http://127.0.0.1:4567/"; // when init argument is nil */
 static CGFloat minRowHeight = 44;
-@synthesize _json_url,_json_parsed,_cellImageCache,_transparent_placeholder;
+@synthesize _json_url,_json_parsed,_cellImageCache,_transparent_placeholder,_giant;
 /*
 	there should be more documentation at http://github.com/jackdoe/
 	
@@ -128,6 +128,7 @@ color-dictionary example:
 - (void) async_reload {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		[_giant lock];
 		SBJsonParser *p = [[SBJsonParser alloc] init];
 		NSError *err;
 		id obj = [p objectWithData:[NSData dataWithContentsOfURL:_json_url options:NSDataReadingMappedAlways error:&err]];
@@ -137,6 +138,7 @@ color-dictionary example:
 			NSLog(@"%@",err);
 		}
 		[self performSelectorOnMainThread:@selector(_mainThreadPostReload) withObject:nil waitUntilDone:YES];
+		[_giant unlock];
 	});
 }
 - (id) initWithString:(NSString *) string {
@@ -153,6 +155,7 @@ color-dictionary example:
 	 */
 	self = [super initWithStyle:([string rangeOfString:@"UITableViewStyleGrouped"].location == NSNotFound) ? UITableViewStylePlain : UITableViewStyleGrouped]; 
 	if (self) {
+		self._giant = [[NSLock alloc] init];
 		self._cellImageCache = [NSMutableDictionary dictionary];
 		self._json_url = [NSURL URLWithString:string];
 		self._transparent_placeholder = [UIImage imageNamed:@"trans"];
@@ -171,7 +174,7 @@ color-dictionary example:
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reload)];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(async_reload)];
 }
 
 - (void)viewDidUnload {
