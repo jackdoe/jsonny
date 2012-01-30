@@ -128,7 +128,6 @@ color-dictionary example:
 - (void) async_reload {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		[_giant lock];
 		SBJsonParser *p = [[SBJsonParser alloc] init];
 		NSError *err;
 		id obj = [p objectWithData:[NSData dataWithContentsOfURL:_json_url options:NSDataReadingMappedAlways error:&err]];
@@ -138,7 +137,6 @@ color-dictionary example:
 			NSLog(@"%@",err);
 		}
 		[self performSelectorOnMainThread:@selector(_mainThreadPostReload) withObject:nil waitUntilDone:YES];
-		[_giant unlock];
 	});
 }
 - (id) initWithString:(NSString *) string {

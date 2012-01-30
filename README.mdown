@@ -7,7 +7,7 @@ JSonny - json controlled uitableviewcontroller
 ## Installation ##
 
 * JSonny uses SBJson(https://github.com/stig/json-framework/) to parse json strings into objects, so download it from https://github.com/stig/json-framework/ and put it in your xcode project
-* copy JSonny.h and JSonny.m into your xcode project
+* copy JSonny.h and JSonny.m into your xcode project and #import "JSonny.h"
 * thats it :)
 
 ## NOTICE: ##
