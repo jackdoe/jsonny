@@ -1,0 +1,59 @@
+JSonny - simple UITableViewController subclass, that lets you control the table from remote JSON objects
+---
+
+[![](http://farm8.staticflickr.com/7159/6788565653_6163433af6.jpg)](http://www.flickr.com/photos/71088131@N07/6788565653/)
+[![](http://farm8.staticflickr.com/7146/6788559637_02187c8dc1.jpg)](http://www.flickr.com/photos/71088131@N07/6788559637/)
+
+## NOTICE: ##
+	
+	1. there is no support for pure int values, all of them must be converted to string
+		example: borderWidth => 7 must be borderWidth => '7', 
+	2. if the initString contains UITableViewStyleGrouped, then the table style is grouped, otherwise its plain
+	3. if no color is given, when color is expected -  [UIColor clearColor] is used
+## examples: ##
+	
+### root object: ###
+	title => 'table's title'
+	minRowHeight => 'minimal row height'
+	sections => [array with each section's rows]
+
+### row example: ###
+	initWithStyle => ('UITableViewCellStyleValue1','UITableViewCellStyleValue2','UITableViewCellStyleSubtitle', none=UITableViewCellStyleDefault)
+	backgroundColor => color-dictionary or color pattern image string
+	image => 		
+		{ 	
+			'url' => 'https://www.google.com/intl/en_com/images/srpr/logo3w.png', 
+			'layer' => { 	
+						'maskToBounds' => 'YES',
+						'cornerRadius' => '6.5',
+						'borderWidth' => '7',
+						'borderColor' => color-dictionary or color pattern image string
+						}
+	    } - or simple url string ( image => 'https://www.google.com/intl/en_com/images/srpr/logo3w.png' )
+	textLabel|detailTextLabel =>		 
+			{ 
+				'text' => "label's text", 
+				'font' => { 
+							'name' => 'Trebuchet MS', 
+							'size' => '30'
+						  },
+				'textColor' => color-dictionary or color pattern image string
+			} - or textLabel.text string ( textLabel => 'just print this!' )
+			
+	heightForRow => '60' # height for current row
+	editingStyleDelete => 'http://127.0.0.1:4567/delete/5' - url will be visited when user clicks the delete button
+	didSelectRow => #when user clicks on the row
+			{
+				'name' => 'JSonny', # for security if class's name is not the same as the current clas, it must have prefix RemoteJsonRequestClass_
+				'init' => { 
+							'method' => 'initWithString:',
+							'argument' => @request.url
+						  }
+			 }
+
+	color-dictionary example:
+		if the object is dictionary:
+		{
+			'red' => '255','green' => '255', 'blue' => '255', 'alpha' => '0.90'
+		}
+
